@@ -1,0 +1,53 @@
+node {
+  try { 
+    stage ('git'){
+      echo 'checkout scm'
+      sh 'echo test'
+      //checkout scm
+    }
+    stage ('build'){
+      //sh 'mvn clean package'
+      parallel 'maven build':{
+         sh 'echo test'
+      }, 'node build':{
+          sh 'echo test'
+      }
+    }
+    stage ('test'){
+      sh 'echo test'
+    }
+    stage ('staging deploy'){
+      sh 'echo test'
+      echo 'checkout scm'
+    }
+    stage ('test after staging deploy'){
+      parallel 'phantomjs chrome':{
+         sh 'echo test'
+      }, 'phantomjs firefox':{
+         sh 'echo test'
+      }, 'phantomjs edge':{
+         sh 'echo test'
+      }
+    }
+    stage ('puroduction deploy'){
+      echo 'checkout scm'
+      sh 'echo test'
+    }
+    stage ('test after production deploy'){
+      parallel 'phantomjs chrome':{
+         sh 'echo test'
+      }, 'phantomjs firefox':{
+         sh 'echo test'
+      }, 'phantomjs edge':{
+         sh 'echo test'
+      }
+    }
+    stage('Archive result') {
+      sh 'touch 1.xml'
+      archiveArtifacts '1.xml'
+    }
+  } catch(e){
+    //slackSend (channel: '#general', color: '#FF0000', message: 'Error happened!')
+    throw e
+  }
+}
