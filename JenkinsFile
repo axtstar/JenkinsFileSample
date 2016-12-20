@@ -1,9 +1,7 @@
 node {
   try { 
     stage ('git'){
-      echo 'checkout scm'
-      sh 'echo test'
-      //checkout scm
+      checkout scm
     }
     stage ('build'){
       //sh 'mvn clean package'
