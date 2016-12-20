@@ -2,8 +2,8 @@ node {
   try { 
     //def array = ["a", "b", "c"] as String[]
     stage('prepare'){
-      sh 'apt-get install sbt'
-      sh 'apt-get install npm'
+      sh 'sudo apt-get install sbt'
+      sh 'sudo apt-get install npm'
     }
     stage ('git'){
       checkout scm
