@@ -1,48 +1,46 @@
 node {
   try { 
+    //def array = ["a", "b", "c"] as String[]
     stage ('git'){
       checkout scm
     }
     stage ('build'){
-      //sh 'mvn clean package'
-      parallel 'maven build':{
-         sh 'echo test'
+      parallel 'sbt build':{
+         sh 'sbt compile'
       }, 'node build':{
-          sh 'echo test'
+          sh 'npm install'
       }
     }
     stage ('test'){
-      sh 'echo test'
+      sh 'sbt test'
     }
     stage ('staging deploy'){
-      sh 'echo test'
-      echo 'checkout scm'
+      sh 'sbt publish'
     }
     stage ('test after staging deploy'){
-      parallel 'phantomjs chrome':{
+      parallel 'chrome':{
          sh 'echo test'
-      }, 'phantomjs firefox':{
+      }, 'firefox':{
          sh 'echo test'
-      }, 'phantomjs edge':{
+      }, 'edge':{
          sh 'echo test'
       }
     }
     stage ('puroduction deploy'){
-      echo 'checkout scm'
       sh 'echo test'
     }
     stage ('test after production deploy'){
-      parallel 'phantomjs chrome':{
+      parallel 'chrome':{
          sh 'echo test'
-      }, 'phantomjs firefox':{
+      }, 'firefox':{
          sh 'echo test'
-      }, 'phantomjs edge':{
+      }, 'edge':{
          sh 'echo test'
       }
     }
     stage('Archive result') {
-      sh 'touch 1.xml'
-      archiveArtifacts '1.xml'
+      sh 'touch dummy.xml'
+      archiveArtifacts 'dummy.xml'
     }
   } catch(e){
     //slackSend (channel: '#general', color: '#FF0000', message: 'Error happened!')
