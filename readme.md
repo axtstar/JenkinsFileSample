@@ -1,3 +1,5 @@
+# prepare
+
 First of all, for the convinience to build the DockerFile
  
  >docker build .
@@ -18,3 +20,5 @@ Change permission easily access for jenkins user inside the docker container.
 Replace *IMAGE ID* for that mention the above.
 
  >docker run -p 8080:8080 -p 50000:50000 -v $(pwd)/jenkins_home/:/var/jenkins_home *IMAGE ID*
+
+#jenkins
