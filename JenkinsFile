@@ -11,7 +11,7 @@ node {
       parallel 'sbt build':{
          sh 'sbt compile'
       }, 'node build':{
-          sh 'npm install'
+          sh 'npm -v'
       }
     }
     stage ('test'){
