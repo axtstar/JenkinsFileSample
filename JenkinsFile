@@ -3,8 +3,6 @@ node {
     //def array = ["a", "b", "c"] as String[]
     stage('prepare'){
       sh 'uname -a'
-      sh 'sudo apt-get install sbt'
-      sh 'sudo apt-get install npm'
     }
     stage ('git'){
       checkout scm
